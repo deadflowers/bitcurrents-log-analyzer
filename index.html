@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BitCurrents Log Analyzer</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+ <meta name="description" content="Ray Kooyenga website">
+  <meta name="author" content="ray kooyenga">
+  <meta name="copyright" content="ray kooyenga" >
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Cache-Control" content="no-cache, max-age=0, must-revalidate, no-store">
+  <meta name="language" content="English, en">
+  <link rel="icon" type="image/jpeg" sizes="144x144" href="icon_144.jpg">
+  <link rel="icon" type="image/png" sizes="192x192" href="icon_192.jpg">
+  <meta name="author" content="ray kooyenga" />
+  <meta name="application-name" content="bitcurrents log analyzer">
+
+    <style>
+        :root { --font-sans: system-ui, -apple-system, sans-serif; --bg-dark: #111827; --surface-dark: #1F2937; --border-dark: #374151; --font-dark: #E5E7EB; --header-dark: #FFFFFF; --bg-light: #F9FAFB; --surface-light: #FFFFFF; --border-light: #E5E7EB; --font-light: #1F2937; --header-light: #111827; }
+        * { box-sizing: border-box; }
+        html { font-family: var(--font-sans); }
+        body { background-color: var(--bg-dark); color: var(--font-dark); margin: 0; padding: 2rem; transition: background-color 0.3s, color 0.3s; }
+        body.light-theme { background-color: var(--bg-light); color: var(--font-light); }
+        .container { max-width: 1600px; margin: 0 auto; }
+        header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+        header h1 { font-size: 2.2rem; font-weight: 700; color: var(--header-dark); }
+        body.light-theme header h1 { color: var(--header-light); }
+        .controls { background: var(--surface-dark); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border-dark); margin-bottom: 2.5rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; align-items: end; }
+        body.light-theme .controls { background: var(--surface-light); border-color: var(--border-light); }
+        .control-item-full { grid-column: 1 / -1; }
+        .btn-container { position: relative; display: inline-block; padding: 0; border-radius: 10px; cursor: pointer; user-select: none; background: transparent; box-shadow: inset 0 4px 6px rgba(0,0,0,0.4), inset 0 -4px 6px rgba(255,255,255,0.1); border: none; }
+        .btn-face { display: flex; align-items: center; justify-content: center; padding: 12px 24px; border-radius: 8px; font-weight: 600; font-size: 1rem; letter-spacing: 0.5px; transition: transform 0.15s ease, box-shadow 0.15s ease; box-shadow: 0 6px 12px rgba(0,0,0,0.4); color: #fff; width: 100%; height: 100%; }
+        .btn-container:hover .btn-face { transform: translateY(-2px); box-shadow: 0 8px 14px rgba(0,0,0,0.5); }
+        .btn-container:active .btn-face { transform: translateY(3px); box-shadow: inset 0 2px 6px rgba(0,0,0,0.5); }
+        .btn-container:disabled { cursor: not-allowed; opacity: 0.6; }
+        .main-action { height: 52px; font-size: 1.1rem; }
+        .lime .btn-face { background: linear-gradient(135deg, #a8ff3e, #4caf50); }
+        .blue .btn-face { background: linear-gradient(135deg, #00c6ff, #0072ff); }
+        .graphite .btn-face { background: radial-gradient(circle at top, #4a4a4a, #222); border: 1px inset rgba(92,92,92,0.6); }
+        .red .btn-face { background: linear-gradient(135deg, #ff4d4d, #b30000); }
+        label { font-weight: 500; margin-bottom: 0.5rem; display: block; }
+        #securityChecks label, .mode-selector label, .scope-selector label { display: inline-block; margin-right: 1rem; }
+        input[type="text"], select { width: 100%; background: var(--bg-dark); color: var(--font-dark); border: 1px solid var(--border-dark); padding: 0.75rem; border-radius: 8px; }
+        body.light-theme input[type="text"], body.light-theme select { background: var(--surface-light); color: var(--font-light); border-color: var(--border-light); }
+        .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+        .kpi-card { background: var(--surface-dark); padding: 1rem; border-radius: 8px; text-align: center; }
+        .kpi-card .value { font-size: 2.5rem; font-weight: bold; }
+        .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; margin-bottom: 2rem; }
+        .chart-container { background: var(--surface-dark); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border-dark); min-height: 400px; display: flex; flex-direction: column; }
+        .chart-container canvas { flex-grow: 1; }
+        body.light-theme .chart-container, body.light-theme .kpi-card { background: var(--surface-light); border-color: var(--border-light); }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid var(--border-dark); }
+        body.light-theme th, body.light-theme td { border-bottom-color: var(--border-light); }
+        th { font-weight: 600; }
+        .actions-cell { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.7); }
+        .modal-content { background-color: var(--surface-dark); border: 1px solid var(--border-dark); margin: 5% auto; padding: 25px; border-radius: 8px; width: 80%; max-width: 800px; box-shadow: 0 10px 30px #000; }
+        body.light-theme .modal-content { background-color: var(--surface-light); border-color: var(--border-light); }
+        .modal-content pre { background: var(--bg-dark); padding: 10px; border-radius: 5px; white-space: pre-wrap; word-wrap: break-word; }
+        body.light-theme .modal-content pre { background: var(--bg-light); border: 1px solid var(--border-light); }
+        #theme-toggle { font-size: 1.5rem; cursor: pointer; background: var(--surface-dark); padding: 8px; border-radius: 50%; border: 1px solid var(--border-dark); }
+        body.light-theme #theme-toggle { background: var(--surface-light); border-color: var(--border-light); }
+        .info-button { cursor: help; }
+        .empty-state { padding: 4rem; text-align: center; color: #9CA3AF; }
+    </style>
+</head>
+<body onload="init()">
+    <div class="container">
+        <header>
+            <h1>BitCurrents Log Analyzer</h1>
+            <div>
+                <span id="errorTipsBtn" class="info-button" style="font-size: 1.5rem; margin-right: 1rem; display: none;">💡</span>
+                <span id="theme-toggle" style="display: inline-block;">☀️</span>
+            </div>
+        </header>
+
+        <section class="controls">
+            <div>
+                <label for="logDir">Log Directory Path</label>
+                <input type="text" id="logDir" placeholder="/var/log/nginx/">
+            </div>
+            <div>
+                <label for="logFiles">Available Log Files</label>
+                <select id="logFiles" multiple style="height: 100px;"></select>
+            </div>
+            <div>
+                <label for="limit">Results Limit (Unique IPs)</label>
+                <select id="limit">
+                    <option value="20">20</option>
+                    <option value="50" selected>50</option>
+                    <option value="100">100</option>
+                    <option value="300">300</option>
+                </select>
+            </div>
+            <div style="display: flex; gap: 1rem; align-items: end;">
+                <button id="listFilesBtn" class="btn-container blue main-action" style="flex:1;"><span class="btn-face">1. List Files</span></button>
+                <button id="scanBtn" class="btn-container lime main-action" style="flex:1;" disabled><span class="btn-face">2. Analyze</span></button>
+            </div>
+            <div class="control-item-full">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                    <div class="mode-selector">
+                        <label>Analysis Mode</label>
+                        <div>
+                            <label><input type="radio" name="mode" value="general" checked onchange="handleModeChange()"> General</label>
+                            <label><input type="radio" name="mode" value="security" onchange="handleModeChange()"> Security</label>
+                            <label><input type="radio" name="mode" value="error" onchange="handleModeChange()"> Errors</label>
+                        </div>
+                    </div>
+                    <div class="scope-selector">
+                        <label>Analysis Scope</label>
+                        <div>
+                             <label><input type="radio" name="scope" value="unique" checked onchange="renderDashboard()"> Unique IPs</label>
+                             <label><input type="radio" name="scope" value="all" onchange="renderDashboard()"> All Hits</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="securityChecksContainer" class="control-item-full" style="display: none;">
+                <label>Security Categories</label>
+                <div id="securityChecks"></div>
+            </div>
+        </section>
+
+        <div id="dashboardActions" style="margin-bottom: 1rem; display: none;">
+             <button id="resetHiddenBtn" class="btn-container graphite"><span class="btn-face">Show Hidden IPs</span></button>
+        </div>
+        <div id="dashboardContent"></div>
+
+        <div id="errorTipsModal" class="modal"><div class="modal-content"><span onclick="closeModal('errorTipsModal')" style="float:right; cursor:pointer; font-size: 2rem;">&times;</span><div id="errorTipsContent" style="max-height: 80vh; overflow-y: auto;"></div></div></div>
+        <div id="detailsModal" class="modal"><div class="modal-content"><span onclick="closeModal('detailsModal')" style="float:right; cursor:pointer; font-size: 2rem;">&times;</span><h2 id="modalIp"></h2><div id="modalBody"></div></div></div>
+    </div>
+
+<script>
+const API_BASE_URL = 'http://127.0.0.1:5001';
+let fullData = [], hiddenIPs = new Set();
+const elements = {};
+let chartInstances = {};
+
+function init() {
+    ['listFilesBtn', 'scanBtn', 'logDir', 'logFiles', 'limit', 'dashboardContent', 'dashboardActions', 'resetHiddenBtn', 'securityChecksContainer', 'securityChecks', 'errorTipsBtn', 'errorTipsModal', 'detailsModal', 'modalIp', 'modalBody'].forEach(id => elements[id] = document.getElementById(id));
+    elements.listFilesBtn.addEventListener('click', fetchLogFiles);
+    elements.scanBtn.addEventListener('click', fetchData);
+    document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+    elements.errorTipsBtn.addEventListener('click', () => showModal('errorTipsModal'));
+    elements.resetHiddenBtn.addEventListener('click', () => { hiddenIPs.clear(); renderDashboard(); });
+    window.onclick = (event) => { if (event.target.classList.contains('modal')) event.target.style.display = 'none'; };
+    fetchSecurityPatterns();
+    renderErrorTips();
+}
+
+async function fetchSecurityPatterns() {
+    try {
+        const response = await fetch(`${API_BASE_URL}/api/security_patterns`);
+        const patterns = await response.json();
+        elements.securityChecks.innerHTML = Object.entries(patterns).map(([key, desc]) => `<label title="${desc}"><input type="checkbox" name="sec_cat" value="${key}" checked> ${key.replace(/_/g, ' ')}</label>`).join('');
+    } catch (error) { console.error("Could not fetch security patterns:", error); }
+}
+
+function handleModeChange() {
+    const mode = document.querySelector('input[name="mode"]:checked').value;
+    elements.securityChecksContainer.style.display = mode === 'security' ? 'block' : 'none';
+    elements.errorTipsBtn.style.display = mode === 'error' ? 'inline-block' : 'none';
+    document.querySelector('.scope-selector').style.display = (mode === 'general' || mode === 'security') ? 'block' : 'none';
+    if(fullData.length > 0) renderDashboard();
+}
+
+async function fetchLogFiles() {
+    const face = elements.listFilesBtn.querySelector('.btn-face');
+    face.textContent = 'Listing...';
+    elements.listFilesBtn.disabled = true;
+    let url = new URL(`${API_BASE_URL}/api/log_files`);
+    if (elements.logDir.value.trim()) url.searchParams.append('log_dir', elements.logDir.value.trim());
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || 'Failed to list files.');
+        elements.logFiles.innerHTML = data.map(f => `<option value="${f}" selected>${f}</option>`).join('');
+        elements.scanBtn.disabled = data.length === 0;
+    } catch (e) { alert(`Error: ${e.message}`); } finally {
+        face.textContent = '1. List Files';
+        elements.listFilesBtn.disabled = false;
+    }
+}
+
+async function fetchData() {
+    const face = elements.scanBtn.querySelector('.btn-face');
+    face.textContent = 'Analyzing...';
+    elements.scanBtn.disabled = true;
+    elements.listFilesBtn.disabled = true;
+    try {
+        const mode = document.querySelector('input[name="mode"]:checked').value;
+        let url = new URL(`${API_BASE_URL}/api/analyze`);
+        url.searchParams.append('mode', mode);
+        url.searchParams.append('limit', elements.limit.value);
+        if (elements.logDir.value.trim()) url.searchParams.append('log_dir', elements.logDir.value.trim());
+        url.searchParams.append('files', Array.from(elements.logFiles.selectedOptions).map(opt => opt.value).join(','));
+        if (mode === 'security') {
+            const checkedCats = Array.from(document.querySelectorAll('input[name="sec_cat"]:checked')).map(cb => cb.value);
+            if (checkedCats.length > 0) url.searchParams.append('sec_cats', checkedCats.join(','));
+        }
+        const response = await fetch(url);
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || 'API Error');
+        fullData = data.results;
+        hiddenIPs.clear();
+        renderDashboard();
+    } catch (e) { alert(`Error: ${e.message}`); } finally {
+        face.textContent = '2. Analyze';
+        elements.scanBtn.disabled = false;
+        elements.listFilesBtn.disabled = false;
+    }
+}
+
+function recalculateStats(visibleData) {
+    const scope = document.querySelector('input[name="scope"]:checked')?.value || 'unique';
+    const stats = { traffic_type: {}, device_type: {}, os_dist: {}, browser_dist: {}, status_codes: {}, top_successful_pages: {}, top_countries: {}, attack_category: {}, top_attackers: {}, error_type: {}, error_severity: {} };
+    const uniqueIPsForStats = new Set();
+    visibleData.forEach(ipInfo => {
+        const firstRequest = ipInfo.requests?.[0];
+        const isFirstHitForIP = !uniqueIPsForStats.has(ipInfo.ip);
+
+        if (isFirstHitForIP && firstRequest) {
+            uniqueIPsForStats.add(ipInfo.ip);
+            const country = ipInfo.country;
+            if (country) stats.top_countries[country] = (stats.top_countries[country] || 0) + 1;
+            stats.os_dist[firstRequest.classification.os] = (stats.os_dist[firstRequest.classification.os] || 0) + 1;
+            stats.browser_dist[firstRequest.classification.browser] = (stats.browser_dist[firstRequest.classification.browser] || 0) + 1;
+            stats.device_type[firstRequest.classification.device] = (stats.device_type[firstRequest.classification.device] || 0) + 1;
+        }
+
+        (ipInfo.requests || []).forEach(req => {
+            if (scope === 'all') {
+                stats.traffic_type[req.classification.type] = (stats.traffic_type[req.classification.type] || 0) + 1;
+            }
+            stats.status_codes[req.status] = (stats.status_codes[req.status] || 0) + 1;
+            const page = (req.request_line.split(' ')[1] || 'N/A');
+            if (200 <= parseInt(req.status) < 300) {
+                stats.top_successful_pages[page] = (stats.top_successful_pages[page] || 0) + 1;
+            }
+        });
+
+        const violations = (ipInfo.requests || []).map(r => r.violation).filter(Boolean);
+        if (violations.length > 0) {
+            stats.top_attackers[ipInfo.ip] = (stats.top_attackers[ipInfo.ip] || 0) + violations.length;
+            violations.forEach(v_cat => {
+                stats.attack_category[v_cat] = (stats.attack_category[v_cat] || 0) + 1;
+            });
+        }
+        
+        (ipInfo.errors || []).forEach(e => {
+            stats.error_type[e.classification] = (stats.error_type[e.classification] || 0) + 1;
+            stats.error_severity[e.severity] = (stats.error_severity[e.severity] || 0) + 1;
+        });
+    });
+    if (scope === 'unique') { stats.traffic_type = {}; visibleData.forEach(ip => { const type = ip.requests?.[0]?.classification.type || 'Unknown'; stats.traffic_type[type] = (stats.traffic_type[type] || 0) + 1; }); }
+    return stats;
+}
+
+function groupLongTail(data, topN = 9, includeOther = true) {
+    if (!data || Object.keys(data).length === 0) return {};
+    const sorted = Object.entries(data).sort(([,a],[,b]) => b-a);
+    const topItems = Object.fromEntries(sorted.slice(0, topN));
+    if (includeOther) {
+        const otherCount = sorted.slice(topN).reduce((sum, [,count]) => sum + count, 0);
+        if (otherCount > 0) topItems['Other'] = otherCount;
+    }
+    return topItems;
+}
+
+function renderDashboard() {
+    const mode = document.querySelector('input[name="mode"]:checked').value;
+    const visibleData = fullData.filter(item => !hiddenIPs.has(item.ip));
+    const stats = recalculateStats(visibleData);
+    elements.dashboardActions.style.display = fullData.length > 0 ? 'block' : 'none';
+    let content = '<div class="empty-state"><h3>No data to display.</h3><p>Please select log files and click Analyze.</p></div>';
+
+    if (visibleData.length > 0) {
+        switch(mode) {
+            case 'general':
+                const totalHits = Object.values(stats.status_codes || {}).reduce((a, b) => a + b, 0);
+                content = `<div class="kpi-grid">
+                        <div class="kpi-card"><div class="value">${totalHits}</div><div>Total Hits</div></div>
+                        <div class="kpi-card"><div class="value">${visibleData.length}</div><div>Unique IPs</div></div>
+                        <div class="kpi-card"><div class="value" style="color:#ff4d4d;">${stats.traffic_type['Impersonator'] || 0}</div><div>Impersonators</div></div>
+                        <div class="kpi-card"><div class="value">${stats.traffic_type['Suspicious Activity'] || 0}</div><div>Suspicious Hits</div></div>
+                    </div>
+                    <div class="dashboard-grid">
+                        <div class="chart-container"><canvas id="trafficTypeChart"></canvas></div><div class="chart-container"><canvas id="deviceTypeChart"></canvas></div><div class="chart-container"><canvas id="osDistChart"></canvas></div>
+                        <div class="chart-container"><canvas id="browserDistChart"></canvas></div><div class="chart-container"><canvas id="statusCodesChart"></canvas></div><div class="chart-container"><canvas id="topCountriesChart"></canvas></div>
+                        <div class="chart-container" style="grid-column: 1 / -1;"><canvas id="topSuccessfulPagesChart"></canvas></div>
+                    </div>`;
+                break;
+            case 'security':
+                content = (Object.keys(stats.attack_category || {}).length > 0) ? `<div class="dashboard-grid"><div class="chart-container"><canvas id="attackCatChart"></canvas></div><div class="chart-container"><canvas id="topAttackersChart"></canvas></div></div>` : `<div class="empty-state"><h3>No security events found.</h3><p>Your logs look clean based on the selected categories!</p></div>`;
+                break;
+            case 'error':
+                 content = (Object.keys(stats.error_type || {}).length > 0) ? `<div class="dashboard-grid"><div class="chart-container"><canvas id="errorTypeChart"></canvas></div><div class="chart-container"><canvas id="errorSeverityChart"></canvas></div></div>` : `<div class="empty-state"><h3>No error log entries found.</h3><p>Please ensure you have selected an Nginx error log file.</p></div>`;
+                break;
+        }
+        content += `<section class="chart-container" style="margin-top: 2rem;"><table><thead><tr><th>IP / ISP</th><th>Location</th><th>Hits</th><th>Actions</th></tr></thead><tbody id="dataTableBody"></tbody></table></section>`;
+    }
+    
+    elements.dashboardContent.innerHTML = content;
+    requestAnimationFrame(() => {
+        if (visibleData.length > 0) {
+            renderTable(visibleData);
+            renderCharts(stats, mode);
+        }
+    });
+}
+
+function renderTable(data) {
+    const body = document.getElementById('dataTableBody');
+    if (!body) return;
+    body.innerHTML = data.map(item => {
+        const originalIndex = fullData.findIndex(d => d.ip === item.ip);
+        const hitCount = item.requests?.length || item.errors?.length || 0;
+        return `<tr><td><strong>${item.ip}</strong><br><small>${item.isp || 'N/A'}</small></td><td>${item.city || 'N/A'}, ${item.country || 'N/A'}</td><td>${hitCount}</td><td class="actions-cell">
+            <button class="btn-container lime" onclick="addToList('allow', '${item.ip}')"><span class="btn-face">Allow</span></button>
+            <button class="btn-container red" onclick="addToList('block', '${item.ip}')"><span class="btn-face">Block</span></button>
+            <button class="btn-container blue" onclick="showDetailsModal(${originalIndex})"><span class="btn-face">View</span></button>
+            <button class="btn-container graphite" onclick="hideIP('${item.ip}')" style="opacity:0.7;"><span class="btn-face">Hide</span></button>
+            </td></tr>`;
+    }).join('');
+}
+
+function hideIP(ip) { hiddenIPs.add(ip); renderDashboard(); }
+
+function truncateLabel(str, maxLen = 30) {
+    if (typeof str !== 'string') return String(str);
+    return str.length > maxLen ? str.substring(0, maxLen) + '...' : str;
+}
+
+function renderCharts(stats, mode) {
+    Object.values(chartInstances).forEach(chart => chart.destroy());
+    const fontColor = document.body.classList.contains('light-theme') ? '#1F2937' : '#E5E7EB';
+    const chartConfigs = {
+        general: [
+            { id: 'trafficTypeChart', type: 'doughnut', data: stats.traffic_type, label: 'Traffic Breakdown' },
+            { id: 'deviceTypeChart', type: 'doughnut', data: stats.device_type, label: 'Device Types (by Unique IP)' },
+            { id: 'osDistChart', type: 'bar', data: stats.os_dist, label: 'OS Distribution (by Unique IP)', indexAxis: 'y' },
+            { id: 'browserDistChart', type: 'bar', data: stats.browser_dist, label: 'Browser Distribution (by Unique IP)', indexAxis: 'y' },
+            { id: 'statusCodesChart', type: 'bar', data: stats.status_codes, label: 'HTTP Status Codes (All Hits)' },
+            { id: 'topCountriesChart', type: 'bar', data: groupLongTail(stats.top_countries), label: 'Top Countries (by Unique IP)', indexAxis: 'y' },
+            { id: 'topSuccessfulPagesChart', type: 'bar', data: groupLongTail(stats.top_successful_pages, 10, false), label: 'Top 10 Successful Pages (All Hits)', indexAxis: 'y' }
+        ],
+        security: [ { id: 'attackCatChart', type: 'doughnut', data: stats.attack_category, label: 'Attack Categories' }, { id: 'topAttackersChart', type: 'bar', data: groupLongTail(stats.top_attackers), label: 'Top Attacking IPs', indexAxis: 'y' } ],
+        error: [ { id: 'errorTypeChart', type: 'bar', data: stats.error_type, label: 'Common Error Types', indexAxis: 'y' }, { id: 'errorSeverityChart', type: 'doughnut', data: stats.error_severity, label: 'Error Severity' } ]
+    };
+    (chartConfigs[mode] || []).forEach(config => {
+        const canvas = document.getElementById(config.id);
+        if (!canvas || !config.data || Object.keys(config.data).length === 0) return;
+        const originalLabels = Object.keys(config.data);
+        const truncatedLabels = originalLabels.map(label => truncateLabel(label));
+        chartInstances[config.id] = new Chart(canvas.getContext('2d'), { type: config.type, data: { labels: truncatedLabels, datasets: [{ label: config.label, data: Object.values(config.data), backgroundColor: ['#00c6ff', '#a8ff3e', '#7873f5', '#ff6ec4', '#ff9a00', '#ff4d4d', '#36A2EB', '#FFCE56', '#FF6384', '#4BC0C0'], borderWidth: 0, barThickness: 25, categoryPercentage: 0.8 }] }, options: { indexAxis: config.indexAxis || 'x', responsive: true, maintainAspectRatio: false, plugins: { title: { display: true, text: config.label, color: fontColor, font: { size: 16 } }, legend: { display: config.type === 'doughnut', position: 'bottom', labels: { color: fontColor } }, tooltip: { callbacks: { title: (tooltipItems) => originalLabels[tooltipItems[0].dataIndex], label: function(context) { return 'Count: ' + context.formattedValue; } } } }, scales: config.type === 'bar' ? { y: { ticks: { color: fontColor } }, x: { ticks: { color: fontColor } } } : {} } });
+    });
+}
+
+function showDetailsModal(index) {
+    const item = fullData[index];
+    const mode = document.querySelector('input[name="mode"]:checked').value;
+    elements.modalIp.textContent = `Details for ${item.ip}`;
+    let body = '';
+    if (mode === 'error') {
+        const errors = item.errors || [];
+        body += `<h3>Errors (${errors.length})</h3><pre>${errors.map(e => `[${e.severity}] ${e.classification}: ${e.message}`).slice(0, 10).join('\n---\n')}</pre>`;
+    } else {
+        const requests = item.requests || [];
+        const referrers = [...new Set(requests.map(r => r.referrer).filter(r => r !== '-'))];
+        const firstRequest = requests[0] || {};
+        const classification = firstRequest.classification || { name: 'N/A', type: 'N/A' };
+        const violations = requests.map(r => r.violation && { category: r.violation, request: r.request_line }).filter(Boolean);
+        body += `<h3>Summary</h3><p><strong>Total Hits:</strong> ${requests.length}<br><strong>Classification:</strong> ${classification.name} (${classification.type})</p>`;
+        body += `<h3>Sample Requests (up to 10)</h3><pre>${requests.map(r => r.request_line).slice(0, 10).join('\n')}</pre>`;
+        body += `<h3>Unique Referrers</h3><pre>${referrers.length > 0 ? referrers.join('\n') : 'None'}</pre>`;
+        body += `<h3>Sample User Agent</h3><pre>${firstRequest.user_agent || 'N/A'}</pre>`;
+        if (violations.length > 0) body += `<h3>Security Violations (${violations.length})</h3><pre>${violations.map(v => `[${v.category}] ${v.request}`).slice(0, 10).join('\n')}</pre>`;
+    }
+    let rawDataHtml = '<h3>IP2Location Data</h3><pre>';
+    if(item.raw_data && Object.keys(item.raw_data).length > 0) {
+        for(const [key, value] of Object.entries(item.raw_data)) { rawDataHtml += `<strong>${key}:</strong> ${JSON.stringify(value)}\n`; }
+    } else { rawDataHtml += 'No detailed IP data available.'; }
+    rawDataHtml += '</pre>';
+    elements.modalBody.innerHTML = body + rawDataHtml;
+    showModal('detailsModal');
+}
+
+function showModal(id) { document.getElementById(id).style.display = 'block'; }
+function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+function toggleTheme() { document.body.classList.toggle('light-theme'); document.getElementById('theme-toggle').textContent = document.body.classList.contains('light-theme') ? '🌙' : '☀️'; renderDashboard(); }
+function addToList(type, ip) { alert(`${type.charAt(0).toUpperCase() + type.slice(1)} action for IP: ${ip}`); }
+function renderErrorTips() { elements.errorTipsContent.innerHTML = `<h2>Nginx Error Log Quick Guide</h2><p>Your Nginx error log is like a health monitor for your server. Here are the essentials:</p><h3>Where to Find It</h3><p>Default path: <code>/var/log/nginx/error.log</code></p><h3>Common Errors & Fixes</h3><ul><li><strong>connect() failed</strong> &rarr; Backend not running or wrong address/port.</li><li><strong>directory index forbidden</strong> &rarr; Add an <code>index.html</code> file or enable <code>autoindex on;</code>.</li><li><strong>no live upstreams</strong> &rarr; All backends in an upstream group are down.</li><li><strong>too large body</strong> &rarr; Request exceeded size limit. Increase <code>client_max_body_size</code>.</li><li><strong>upstream timed out</strong> &rarr; Backend too slow. Raise <code>proxy_read_timeout</code>.</li></ul><h3>Security Clues in Logs</h3><p>Repeated 404s to <code>/wp-admin</code>, <code>/phpmyadmin</code>, or <code>.env</code> indicate scanning activity.</p>`; }
+</script>
+</body>
+</html>
