@@ -1,0 +1,42 @@
+{
+  "Googlebot": {
+    "type": "Search Engine",
+    "ips": ["66.249.64.0/19"]
+  },
+  "Bingbot": {
+    "type": "Search Engine",
+    "ips": ["40.77.167.0/24", "157.55.39.0/24", "207.46.13.0/24"]
+  },
+  "GPTBot": {
+    "type": "AI Crawler",
+    "ips": ["23.98.142.176/28", "40.83.240.0/28"]
+  },
+  "CCBot": {
+    "type": "AI Crawler",
+    "ips": []
+  },
+  "DuckDuckBot": {
+    "type": "Search Engine",
+    "ips": []
+  },
+  "AhrefsBot": {
+    "type": "Commercial",
+    "ips": []
+  },
+  "SemrushBot": {
+    "type": "Commercial",
+    "ips": []
+  },
+  "sqlmap": {
+    "type": "Malicious",
+    "ips": []
+  },
+  "nmap": {
+    "type": "Malicious",
+    "ips": []
+  },
+  "zgrab": {
+    "type": "Malicious",
+    "ips": []
+  }
+}

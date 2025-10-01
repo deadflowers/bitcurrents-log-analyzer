@@ -1,0 +1,22 @@
+{
+  "config_exposure": {
+    "description": "Direct requests for secrets, environment files, or version control metadata.",
+    "patterns": ["/\\.env", "/\\.git", "/\\.svn", "/\\.htaccess", "/\\.htpasswd", "/\\.ssh", "/\\.passwords"]
+  },
+  "webshells": {
+    "description": "Common webshell and dropper filenames.",
+    "patterns": ["/(w(uwu|c|s|shell)|x(w|s|shell)|qq|ak47|phpstudy|system|cmd|mx|lindex|hm|sheep|defect)\\.php$"]
+  },
+  "wordpress": {
+    "description": "WordPress brute force and exploit probes.",
+    "patterns": ["/wp-login\\.php", "/xmlrpc\\.php", "/wp-content/uploads/.*\\.php", "/wp-includes/.*\\.php"]
+  },
+  "known_exploits": {
+    "description": "Paths associated with known vulnerabilities in frameworks and admin consoles.",
+    "patterns": ["/vendor/phpunit", "/solr/admin", "/manager/html", "/HNAP1", "/owa/auth/logon\\.aspx"]
+  },
+  "http_methods": {
+    "description": "Suspicious HTTP verbs often used in scanning or exploitation attempts.",
+    "patterns": ["^(PUT|DELETE|OPTIONS|TRACE|CONNECT) "]
+  }
+}
