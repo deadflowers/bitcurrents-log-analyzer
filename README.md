@@ -1,7 +1,7 @@
     # BitCurrents Log Analyzer
 
-![BitCurrents Logo Placeholder](<img width="1513" height="873" alt="image" src="https://github.com/user-attachments/assets/0d6b64f4-5e5e-4802-bd7b-ed2b029ef632" />
-)
+BitCurrents Logo Placeholder <img width="1513" height="873" alt="image" src="https://github.com/user-attachments/assets/0d6b64f4-5e5e-4802-bd7b-ed2b029ef632" />
+
 
 **A powerful, real-time Nginx log analyzer with a focus on security intelligence, performance monitoring, and beautiful data visualization. Powered by the IP2Location API.**
 
@@ -34,7 +34,7 @@ Your command center for at-a-glance traffic overview.
     -   Top Countries & Top Successful Pages
 -   **Powerful Filtering:** Instantly hide noisy IPs to see the real signal, and switch between analyzing Unique IPs vs. All Hits.
 
-*![Screenshot of Main Dash Panel](<img width="1483" height="688" alt="image" src="https://github.com/user-attachments/assets/4ba40fe1-6f05-43da-90cb-b49c65e52231" />
+*![Screenshot of Main Dash Panel][https://github.com/user-attachments/assets/4ba40fe1-6f05-43da-90cb-b49c65e52231 />
 )*
 
 #### 🛡️ Security Mode
