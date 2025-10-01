@@ -1,7 +1,6 @@
-# Bitcurrents Log Analyzer
+## Bitcurrents Log Analyzer
 
 Web traffic log analyzer featuring IP address insights provided by IP2Location API. Concept is created as a entry for their 2025 Hackathon programming contest.
-## BitCurrents Log Analyzer
 
 ### Set Up: 
 Make sure app.py, index.html, .env, bots_database.json, suspicious_paths.json are all in the same directory.
