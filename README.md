@@ -33,7 +33,8 @@ Your command center for at-a-glance traffic overview.
     -   Top Countries & Top Successful Pages
 -   **Powerful Filtering:** Instantly hide noisy IPs to see the real signal, and switch between analyzing Unique IPs vs. All Hits.
 
-*![Screenshot of Main Dash Panel](./promo/panel4.png)*
+*![Screenshot of Main Dash Panel](<img width="1483" height="688" alt="image" src="https://github.com/user-attachments/assets/4ba40fe1-6f05-43da-90cb-b49c65e52231" />
+)*
 
 #### 🛡️ Security Mode
 Proactively hunt for threats and analyze attack patterns.
@@ -41,7 +42,8 @@ Proactively hunt for threats and analyze attack patterns.
 -   **Targeted Visualizations:** See charts for Top Attack Categories and Top Attacking IPs.
 -   **Bot Impersonator Detection:** Automatically flags traffic pretending to be a legitimate crawler from an unverified IP address.
 
-*![Screenshot of Security Dash Panel](./promo/panel1.png)*
+*![Screenshot of Security Dash Panel](<img width="1513" height="873" alt="image" src="https://github.com/user-attachments/assets/2ea5ce38-a3cb-4480-9cbe-16b3a497a04e" />
+)*
 
 #### 🚨 Error Mode
 Quickly diagnose and understand server problems.
