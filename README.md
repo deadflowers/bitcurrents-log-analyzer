@@ -1,6 +1,6 @@
     # BitCurrents Log Analyzer
 
-BitCurrents Logo Placeholder <img width="1513" height="873" alt="image" src="https://github.com/user-attachments/assets/0d6b64f4-5e5e-4802-bd7b-ed2b029ef632" />
+*![BitCurrents Logo Placeholder](https://avatars.githubusercontent.com/u/9669965?s=400&u=6c47ed8a7f9088b5ff6a5b1c977d6948a818397e&v=4)
 
 
 **A powerful, real-time Nginx log analyzer with a focus on security intelligence, performance monitoring, and beautiful data visualization. Powered by the IP2Location API.**
