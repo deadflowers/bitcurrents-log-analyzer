@@ -59,7 +59,7 @@ Clone this repository.
     
         `brew install pyenv`
     
-    Make sure to follow the post-install instructions to add pyenv init to your shell's startup script (.zshrc, .profile, .bashrc, etc.).
+Make sure to follow the post-install instructions to add pyenv init to your shell's startup script (.zshrc, .profile, .bashrc, etc.).
 
 Then add these lines to your shell config (~/.bashrc or ~/.zshrc):
 
@@ -130,20 +130,21 @@ The dashboard will load with the new dark theme.
 - Optionally, enter a path fragment to track in the "Track Custom Path"
 - Click the "Analyze Logs" button.
 
-  Tip: in the app you can use sample logs just entr `.` as directory to search logs then choose in the next area soecific file `combined.log`
+  Tip: in the app you can use sample logs provided `combined.log` in the main project folder. Just entr `.` as directory to search logs then choose in the next area specific file `combined.log`
 
 The charts will populate, and the detailed IP table will appear below. You can now distinguish OS/Bot and any suspicious paths hit directly in the table.
 - Add new paths to your watchlist on-the-fly using the "Add to Suspicious List" feature.
 
 Being conservative with credits we keep an ip cache file as well automatically.
 
-About the logs I made a sample based on some real logs, it is provided in the app as data to test. If you are not having luck when running your own, check your nginx config:
+### NGINX
 
-### NGINX 
+`combined.log` is a quick dump of nginx access logs. It is provided in the app as data to test. If you are not having luck when running your own, check your nginx config:
 
 To display the referrer in Nginx access logs, ensure your `log_format` configuration includes the `$http_referer` variable.
 
 I have in my `nginx.conf` the following:
+
 ```
 # Logging
     log_format custom_format '$remote_addr - $remote_user [$time_local] '
@@ -154,6 +155,7 @@ I have in my `nginx.conf` the following:
 ```
 
 Then in my domain conf:
+
 ```
 # logging
     access_log              /var/log/nginx/site.com.access.log custom_format buffer=512k flush=1m;
@@ -161,11 +163,12 @@ Then in my domain conf:
 ```
 
 Reload
+
 ```
 sudo systemctl reload nginx
 ```
 
-** note this app is being pieced back together last minute from memory and snippets in email as the equipment was all taken in a robbery. This project should be in working order if not it's final incarnaton by end of day today or tomorrow latest. and have more complete notes submitted ** 
+** note this app is being pieced back together last minute from memory and snippets in email as the equipment was all taken in a robbery. This project should be in working order if not it's final incarnaton by end of day today or tomorrow latest. And have more complete notes submitted ** 
 
 Thanks for checking it out, let me know what you think. We look forward to future iterations and new features.
 
