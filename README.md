@@ -22,8 +22,8 @@ Your command center for at-a-glance traffic overview.
     -   Top Countries & Top Successful Pages
 -   **Powerful Filtering:** Instantly hide noisy IPs to see the real signal, and switch between analyzing Unique IPs vs. All Hits.
 
-*![Main Dash](<img width="1483" height="688" alt="image" src="https://github.com/user-attachments/assets/b6666cad-51a8-4fee-ae1a-8f11f0318263" />
-)*
+*![Main Dash](https://github.com/user-attachments/assets/947d71b1-dd58-4d06-9ef9-b813255c7cfa)*
+
 
 #### 🛡️ Security Mode
 Proactively hunt for threats and analyze attack patterns.
@@ -31,8 +31,7 @@ Proactively hunt for threats and analyze attack patterns.
 -   **Targeted Visualizations:** See charts for Top Attack Categories and Top Attacking IPs.
 -   **Bot Impersonator Detection:** Automatically flags traffic pretending to be a legitimate crawler from an unverified IP address.
 
-*![Security Dash](<img width="1340" height="674" alt="image" src="https://github.com/user-attachments/assets/89bb7272-8155-4888-a338-e7a2716f812c" />
-)*
+*![Security Dash](https://github.com/user-attachments/assets/89bb7272-8155-4888-a338-e7a2716f812c)*
 
 #### 🚨 Error Mode
 Quickly diagnose and understand server problems.
@@ -40,8 +39,7 @@ Quickly diagnose and understand server problems.
 -   **Insightful Charts:** Visualize error types and severity levels to prioritize fixes.
 -   **In-App Quick Guide:** A helpful "Error Log Tips" modal provides context and troubleshooting advice for common Nginx errors.
 
-*![IP Panel](<img width="1033" height="565" alt="image" src="https://github.com/user-attachments/assets/181f9579-e045-4437-995f-e57df7dddf46" />
-)*
+*![IP Panel](https://github.com/user-attachments/assets/181f9579-e045-4437-995f-e57df7dddf46)*
 
 ---
 
