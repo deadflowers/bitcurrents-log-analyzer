@@ -1,19 +1,10 @@
     # BitCurrents Log Analyzer
 
-![[BitCurrents Logo Placeholder](htt]ps://github.com/user-attachments/assets/5b2a0f46-8245-49b3-b993-1dc3e03e8b74)]
+![[BitCurrents Logo Placeholder](https://github.com/user-attachments/assets/5b2a0f46-8245-49b3-b993-1dc3e03e8b74)]
 
 **A powerful, real-time Nginx log analyzer with a focus on security intelligence, performance monitoring, and beautiful data visualization. Powered by the IP2Location API.**
 
 BitCurrents turns raw Nginx logs into actionable insights. It moves beyond simple IP lookups to provide a rich, interactive dashboard that helps you understand your traffic, identify security threats, and diagnose server errors instantly. It's a lightweight, single-page web application built with a Python/Flask backend and a dynamic JavaScript frontend.
-
----
-
-### 🏆 Built for the IP2Location Programming Contest
-
-This project leverages the power and precision of the **[IP2Location.io](https://www.ip2location.io/)** API to deliver advanced security features, including:
--   **High-Fidelity Geolocation:** Pinpointing the source of traffic with country, city, and ISP data.
--   **Intelligent Bot Detection:** Moving beyond simple user-agent strings.
--   **Bot Impersonator Flagging:** A critical security feature that verifies if traffic claiming to be from major crawlers (like Googlebot) is actually coming from their published IP ranges.
 
 ---
 
@@ -33,8 +24,7 @@ Your command center for at-a-glance traffic overview.
     -   Top Countries & Top Successful Pages
 -   **Powerful Filtering:** Instantly hide noisy IPs to see the real signal, and switch between analyzing Unique IPs vs. All Hits.
 
-*![Screenshot of Main Dash Panel][https://github.com/user-attachments/assets/4ba40fe1-6f05-43da-90cb-b49c65e52231 />
-)*
+*![Screenshot of Main Dash Panel](https://github.com/user-attachments/assets/4ba40fe1-6f05-43da-90cb-b49c65e52231)*
 
 #### 🛡️ Security Mode
 Proactively hunt for threats and analyze attack patterns.
@@ -42,8 +32,7 @@ Proactively hunt for threats and analyze attack patterns.
 -   **Targeted Visualizations:** See charts for Top Attack Categories and Top Attacking IPs.
 -   **Bot Impersonator Detection:** Automatically flags traffic pretending to be a legitimate crawler from an unverified IP address.
 
-*![Screenshot of Security Dash Panel](<img width="1513" height="873" alt="image" src="https://github.com/user-attachments/assets/2ea5ce38-a3cb-4480-9cbe-16b3a497a04e" />
-)*
+*![Screenshot of Security Dash Panel](<img width="1513" height="873" alt="image" src="https://github.com/user-attachments/assets/2ea5ce38-a3cb-4480-9cbe-16b3a497a04e" />)*
 
 #### 🚨 Error Mode
 Quickly diagnose and understand server problems.
@@ -53,8 +42,19 @@ Quickly diagnose and understand server problems.
 
 *![Screenshot of the Error Mode Dashboard](https://via.placeholder.com/1200x600.png?text=Screenshot:+Error+Dashboard+View)*
 
+---
+
+### 👨‍💻 Hackathon Submission built for the IP2Location Programming Contest
+
+This project leverages the power and precision of the **[IP2Location.io](https://www.ip2location.io/)** API to deliver advanced security features, including:
+-   **High-Fidelity Geolocation:** Pinpointing the source of traffic with country, city, and ISP data.
+-   **Intelligent Bot Detection:** Moving beyond simple user-agent strings.
+-   **Bot Impersonator Flagging:** A critical security feature that verifies if traffic claiming to be from major crawlers (like Googlebot) is actually coming from their published IP ranges.
+
+
 ### Set Up: 
-Clone or download this repository making sure you have app.py, index.html, .env, bots_database.json, suspicious_paths.json are all in the same directory.
+
+Clone this repository.
 
 *   **Install pyenv:** If you don't have it, follow the installation guide. For macOS/Linux with Homebrew, it looks like this:
     
@@ -74,21 +74,17 @@ Clone or download this repository making sure you have app.py, index.html, .env,
       
 *   **Set the Local Python Version:** This command creates a .python-version file in your directory, so pyenv automatically uses this version whenever you're in this folder.
     
-        `pyenv local 3.11.5`
+        `pyenv local 3.13.0`
       
 *   **Create & Activate a Virtual Environment:** This is a best practice within your pyenv version to keep packages project-specific.
     
-        `# Create the virtual environment folder named
-    '.venv' python -m venv .venv  # Activate it source .venv/bin/activate # Your terminal prompt should now show (.venv)`
-      
-*   **Create requirements.txt:** This file lists all the Python packages your project needs.  
-    Create a file named requirements.txt and add the following:
-        
-        ```Flask
-           flask-cors
-           python-dotenv
-           requests
-        ```
+     Create the virtual environment folder named 'venv'
+    `python -m venv .venv`
+    
+     Activate it
+    `source .venv/bin/activate`
+
+     Your terminal prompt should now show `(.venv)`
       
 *   **Install Dependencies:**
     
@@ -100,21 +96,12 @@ Clone or download this repository making sure you have app.py, index.html, .env,
         
     *   Create a file named .env in your project directory and add your key:
            
-        `IP2LOCATION_API_KEY=your_actual_api_key_here`
+        `export IP2LOCATION_API_KEY=your-key`
 
-*   **Set Up Environment:** Follow all the steps in "Step 1: Environment Setup with pyenv". Make sure your .venv is activated.
+Make sure your .venv is activated.
     
-*   **Start the Backend:** In your terminal, inside the bitcurrents-log-analyzer directory, run:
-        
-        `# Make sure you see (.venv) in your prompt python app.py`
-        
-    The server will start on http://127.0.0.1:5001.
-    
-*   **Open the Frontend:**
-  
-Open your terminal in the project directory and activate your pyenv virtual environment:
-
-`source .venv/bin/activate`
+*   **SRun it:** In your terminal, inside the bitcurrents-log-analyzer directory, start the backend, and the front end
+       `source .venv/bin/activate`
 
 ### Start Backend: Run the Python server:
 ```bash
@@ -124,7 +111,7 @@ python app.py
 Open index.html in your web browser as `file:///` path
 
 ### Analyze:
-The dashboard will load with the new dark theme.
+The dashboard will load with the new dark theme. 
 
 - Enter the directory where your logs are stored or copied to.
 - Optionally, enter a path fragment to track in the "Track Custom Path"
@@ -133,7 +120,9 @@ The dashboard will load with the new dark theme.
 The charts will populate, and the detailed IP table will appear below. You can now distinguish OS/Bot and any suspicious paths hit directly in the table.
 - Add new paths to your watchlist on-the-fly using the "Add to Suspicious List" feature.
 
-Being conservative wiwth credits we keep an ip cache file as well automatically.
+Being conservative with credits we keep an ip cache file as well automatically.
+
+About the logs I made a sample based on some real logs, it is provided in the app as data to test. If you are not having luck when running your own, check your nginx config:
 
 ### NGINX 
 
@@ -161,4 +150,9 @@ Reload
 sudo systemctl reload nginx
 ```
 
-** note this app is being pieced back together last minute from memory and snippets in email as the equipment was all taken in a robbery. This project should be in working order if not it's final incarnaton by end of day today or tomorrow latest. and have more complete notes submitted **
+** note this app is being pieced back together last minute from memory and snippets in email as the equipment was all taken in a robbery. This project should be in working order if not it's final incarnaton by end of day today or tomorrow latest. and have more complete notes submitted ** 
+
+Thanks for checking it out, let me know what you think. We look forward to future iterations and new features.
+
+
+Log Analyzer concept by Ray Kooyenga
