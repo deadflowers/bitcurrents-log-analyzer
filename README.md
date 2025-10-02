@@ -1,8 +1,8 @@
-    # BitCurrents Log Analyzer
+# BitCurrents Log Analyzer
 
 **A powerful, real-time Nginx log analyzer with a focus on security intelligence, performance monitoring, and beautiful data visualization. Powered by the IP2Location API.**
 
-BitCurrents turns raw Nginx logs into actionable insights. It moves beyond simple IP lookups to provide a rich, interactive dashboard that helps you understand your traffic, identify security threats, and diagnose server errors instantly. It's a lightweight, single-page web application built with a Python/Flask backend and a dynamic JavaScript frontend.
+BitCurrents Analyzer turns raw Nginx logs into actionable insights. It moves beyond simple IP lookups to provide a rich, interactive dashboard that helps you understand your traffic, identify security threats, and diagnose server errors instantly. It's extremely lightweight as single-page web application, built with a Python/Flask backend and dynamic JavaScript frontend, private, nimble, customizable.
 
 ---
 
