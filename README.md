@@ -60,6 +60,16 @@ Clone this repository.
         `brew install pyenv`
     
     Make sure to follow the post-install instructions to add pyenv init to your shell's startup script (.zshrc, .profile, .bashrc, etc.).
+
+Then add these lines to your shell config (~/.bashrc or ~/.zshrc):
+
+    ```
+    export PATH="$HOME/.pyenv/bin:$PATH"
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
+    ```
+
+Restart your shell so changes take effect.
     
 *   **Install a Python Version:** Let's use a recent, stable version.
     
@@ -67,7 +77,7 @@ Clone this repository.
       
 *   **Create Your Project:**
     
-        `mkdir bitcurrents-log-analyzer`
+        `git clone https://github.com/deadflowers/bitcurrents-log-analyzer`
     
         `cd bitcurrents-log-analyzer`
       
@@ -81,9 +91,10 @@ Clone this repository.
     `python -m venv .venv`
     
      Activate it
+    
     `source .venv/bin/activate`
 
-     Your terminal prompt should now show `(.venv)`
+     Your terminal prompt should have in it `(.venv)`
       
 *   **Install Dependencies:**
     
@@ -100,14 +111,17 @@ Clone this repository.
 Make sure your .venv is activated.
     
 *   **SRun it:** In your terminal, inside the bitcurrents-log-analyzer directory, start the backend, and the front end
+  
        `source .venv/bin/activate`
 
 ### Start Backend: Run the Python server:
+
 ```bash
 python app.py
 ```
+
 ### Launch Frontend: 
-Open index.html in your web browser as `file:///` path
+Open `index.html` in your web browser as `file:///` path
 
 ### Analyze:
 The dashboard will load with the new dark theme. 
@@ -115,6 +129,8 @@ The dashboard will load with the new dark theme.
 - Enter the directory where your logs are stored or copied to.
 - Optionally, enter a path fragment to track in the "Track Custom Path"
 - Click the "Analyze Logs" button.
+
+  Tip: in the app you can use sample logs just entr `.` as directory to search logs then choose in the next area soecific file `combined.log`
 
 The charts will populate, and the detailed IP table will appear below. You can now distinguish OS/Bot and any suspicious paths hit directly in the table.
 - Add new paths to your watchlist on-the-fly using the "Add to Suspicious List" feature.
