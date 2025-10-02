@@ -1,7 +1,5 @@
     # BitCurrents Log Analyzer
 
-![[BitCurrents Logo Placeholder](https://github.com/user-attachments/assets/5b2a0f46-8245-49b3-b993-1dc3e03e8b74)]
-
 **A powerful, real-time Nginx log analyzer with a focus on security intelligence, performance monitoring, and beautiful data visualization. Powered by the IP2Location API.**
 
 BitCurrents turns raw Nginx logs into actionable insights. It moves beyond simple IP lookups to provide a rich, interactive dashboard that helps you understand your traffic, identify security threats, and diagnose server errors instantly. It's a lightweight, single-page web application built with a Python/Flask backend and a dynamic JavaScript frontend.
@@ -24,7 +22,8 @@ Your command center for at-a-glance traffic overview.
     -   Top Countries & Top Successful Pages
 -   **Powerful Filtering:** Instantly hide noisy IPs to see the real signal, and switch between analyzing Unique IPs vs. All Hits.
 
-*![Screenshot of Main Dash Panel](https://github.com/user-attachments/assets/4ba40fe1-6f05-43da-90cb-b49c65e52231)*
+*![Main Dash](<img width="1483" height="688" alt="image" src="https://github.com/user-attachments/assets/b6666cad-51a8-4fee-ae1a-8f11f0318263" />
+)*
 
 #### 🛡️ Security Mode
 Proactively hunt for threats and analyze attack patterns.
@@ -32,7 +31,8 @@ Proactively hunt for threats and analyze attack patterns.
 -   **Targeted Visualizations:** See charts for Top Attack Categories and Top Attacking IPs.
 -   **Bot Impersonator Detection:** Automatically flags traffic pretending to be a legitimate crawler from an unverified IP address.
 
-*![Screenshot of Security Dash Panel](<img width="1513" height="873" alt="image" src="https://github.com/user-attachments/assets/2ea5ce38-a3cb-4480-9cbe-16b3a497a04e" />)*
+*![Security Dash](<img width="1340" height="674" alt="image" src="https://github.com/user-attachments/assets/89bb7272-8155-4888-a338-e7a2716f812c" />
+)*
 
 #### 🚨 Error Mode
 Quickly diagnose and understand server problems.
@@ -40,7 +40,8 @@ Quickly diagnose and understand server problems.
 -   **Insightful Charts:** Visualize error types and severity levels to prioritize fixes.
 -   **In-App Quick Guide:** A helpful "Error Log Tips" modal provides context and troubleshooting advice for common Nginx errors.
 
-*![Screenshot of the Error Mode Dashboard](https://via.placeholder.com/1200x600.png?text=Screenshot:+Error+Dashboard+View)*
+*![IP Panel](<img width="1033" height="565" alt="image" src="https://github.com/user-attachments/assets/181f9579-e045-4437-995f-e57df7dddf46" />
+)*
 
 ---
 
