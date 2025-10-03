@@ -2,7 +2,17 @@
 
 **A powerful, real-time Nginx log analyzer with a focus on security intelligence, performance monitoring, and beautiful data visualization. Powered by the IP2Location API.**
 
+*![Video Demo](https://youtu.be/_bsR1jk-Mas?si=w3B-phr9dqv1ztgD)*
+
 BitCurrents Analyzer turns raw Nginx logs into actionable insights. It moves beyond simple IP lookups to provide a rich, interactive dashboard that helps you understand your traffic, identify security threats, and diagnose server errors instantly. It's extremely lightweight as single-page web application, built with a Python/Flask backend and dynamic JavaScript frontend, private, nimble, customizable.
+
+---
+
+To get started clone the repo, install your virtual environment for pyth9n and some dependency files, run app.py, the go tonthe index file in your browser as 
+
+`///home/name/bitcurrents/index.html` 
+
+Then load the sample log file and choose analyze.
 
 ---
 
