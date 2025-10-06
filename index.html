@@ -79,7 +79,7 @@
         <section class="controls">
             <div>
                 <label for="logDir">Log Directory Path</label>
-                <input type="text" id="logDir" placeholder="/var/log/nginx/">
+                <input type="text" id="logDir" placeholder="./sample_logs">
             </div>
             <div>
                 <label for="logFiles">Available Log Files</label>
@@ -133,7 +133,7 @@
     </div>
 
 <script>
-const API_BASE_URL = 'http://127.0.0.1:5001';
+const API_BASE_URL = 'https://plankton-app-6hg3l.ondigitalocean.app/bitcurrents-log-analyzer2';
 let fullData = [], hiddenIPs = new Set();
 const elements = {};
 let chartInstances = {};
