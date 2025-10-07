@@ -8,11 +8,9 @@ BitCurrents Analyzer turns raw Nginx logs into actionable insights. It moves bey
 
 ---
 
-To get started clone the repo, install your virtual environment for pyth9n and some dependency files, run app.py, the go tonthe index file in your browser as 
+**[Log Analyzer LIVE demo](https://bitcurrents.com/log-analyzer/index.html)**
 
-`///home/name/bitcurrents/index.html` 
-
-Then load the sample log file and choose analyze.
+Follow link, List Button, select file, Analyze Button, wait..., peruse all the things ;) 
 
 ---
 
