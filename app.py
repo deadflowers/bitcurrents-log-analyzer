@@ -15,7 +15,7 @@ app = Flask(__name__)
 CORS(app)
 
 # --- Configuration & Loading ---
-DEFAULT_LOG_DIR = './sample_logs'
+DEFAULT_LOG_DIR = '.'
 IP_CACHE_FILE = 'ip_cache.json'
 BOTS_DATABASE_FILE = 'bots_database.json'
 SECURITY_PATTERNS_FILE = 'security_patterns.json'
