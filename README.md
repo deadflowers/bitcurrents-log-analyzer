@@ -138,11 +138,12 @@ Open `index.html` in your web browser as `file:///` path
 ### Analyze:
 The dashboard will load with the new dark theme. 
 
-- Enter the directory where your logs are stored or copied to. Default is `.` 
+- Enter the directory where your logs are stored or copied to. Default is `.`
+- Hit "List" button to see log files in that directory
 - Optionally, enter a path fragment to track in the "Track Custom Path"
-- Click the "Analyze Logs" button.
+- Click the "Analyze Logs" button and wait a moment.
 
-Tip: in the app you can use sample logs provided `combined.log` in the main project folder. Just entr `.` as directory to search logs then choose in the next area specific file `combined.log`
+You can use sample logs provided in './sample_logs' in the project folder, where you will find `combined.log`. Just entr `.` as directory to search logs then choose in the next area specific file `combined.log`
 
 The charts will populate, and the detailed IP table will appear below. You can now distinguish OS/Bot and any suspicious paths hit directly in the table.
 - Add new paths to your watchlist on-the-fly using the "Add to Suspicious List" feature.
