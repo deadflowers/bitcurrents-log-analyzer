@@ -114,11 +114,15 @@ Restart your shell so changes take effect.
         
     *   Create a file named .env in your project directory and add your key:
            
-        `export IP2LOCATION_API_KEY=your-key`
+         `IP2LOCATION_API_KEY=your-key`
+        
+        or
+        
+         `export IP2LOCATION_API_KEY=your-key`
 
 Make sure your .venv is activated.
     
-*   **SRun it:** In your terminal, inside the bitcurrents-log-analyzer directory, start the backend, and the front end
+*   **Run it:** In your terminal, inside the bitcurrents-log-analyzer directory, start the backend, and the front end
   
        `source .venv/bin/activate`
 
@@ -134,11 +138,11 @@ Open `index.html` in your web browser as `file:///` path
 ### Analyze:
 The dashboard will load with the new dark theme. 
 
-- Enter the directory where your logs are stored or copied to.
+- Enter the directory where your logs are stored or copied to. Default is `.` 
 - Optionally, enter a path fragment to track in the "Track Custom Path"
 - Click the "Analyze Logs" button.
 
-  Tip: in the app you can use sample logs provided `combined.log` in the main project folder. Just entr `.` as directory to search logs then choose in the next area specific file `combined.log`
+Tip: in the app you can use sample logs provided `combined.log` in the main project folder. Just entr `.` as directory to search logs then choose in the next area specific file `combined.log`
 
 The charts will populate, and the detailed IP table will appear below. You can now distinguish OS/Bot and any suspicious paths hit directly in the table.
 - Add new paths to your watchlist on-the-fly using the "Add to Suspicious List" feature.
@@ -176,9 +180,9 @@ Reload
 sudo systemctl reload nginx
 ```
 
-** note this app is being pieced back together last minute from memory and snippets in email as the equipment was all taken in a robbery. This project should be in working order if not it's final incarnaton by end of day today or tomorrow latest. And have more complete notes submitted ** 
-
 Thanks for checking it out, let me know what you think. We look forward to future iterations and new features.
 
 
 Log Analyzer concept by Ray Kooyenga
+
+@deadflowers @rkooyenga
