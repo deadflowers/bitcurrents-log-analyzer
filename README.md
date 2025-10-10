@@ -183,6 +183,7 @@ sudo systemctl reload nginx
 
 Thanks for checking it out, let me know what you think. We look forward to future iterations and new features.
 
+#IP2LocationContest #ProgrammingContest
 
 Log Analyzer concept by Ray Kooyenga
 
