@@ -14,7 +14,7 @@
   <link rel="icon shortcut" type="image/jpeg" sizes="144x144" href="promo/chart-icon-144.jpg">
   <link rel="icon" type="image/jpeg" sizes="192x192" href="promo/chart-icon-192.jpg">
   <meta name="author" content="ray kooyenga" />
-  <meta name="application-name" content="bitcurrents log analyzer">
+  <meta name="application-name" content="bitcurrents nginx log analyzer">
 
     <style>
         :root { --font-sans: system-ui, -apple-system, sans-serif; --bg-dark: #111827; --surface-dark: #1F2937; --border-dark: #374151; --font-dark: #E5E7EB; --header-dark: #FFFFFF; --bg-light: #F9FAFB; --surface-light: #FFFFFF; --border-light: #E5E7EB; --font-light: #1F2937; --header-light: #111827; }
@@ -69,7 +69,8 @@
 <body onload="init()">
     <div class="container">
         <header>
-            <h1>BitCurrents Log Analyzer</h1>
+            <h2>BitCurrents</h2>
+            <h1>Log Analyzer</h1>
             <div>
                 <span id="errorTipsBtn" class="info-button" style="font-size: 1.5rem; margin-right: 1rem; display: none;">💡</span>
                 <span id="theme-toggle" style="display: inline-block;">☀️</span>
@@ -79,7 +80,7 @@
         <section class="controls">
             <div>
                 <label for="logDir">Log Directory Path</label>
-                <input type="text" id="logDir" placeholder="/var/log/nginx/">
+                <input type="text" id="logDir" placeholder=".">
             </div>
             <div>
                 <label for="logFiles">Available Log Files</label>
@@ -95,8 +96,12 @@
                 </select>
             </div>
             <div style="display: flex; gap: 1rem; align-items: end;">
-                <button id="listFilesBtn" class="btn-container blue main-action" style="flex:1;"><span class="btn-face">1. List Files</span></button>
-                <button id="scanBtn" class="btn-container lime main-action" style="flex:1;" disabled><span class="btn-face">2. Analyze</span></button>
+                <button id="listFilesBtn" class="btn-container blue main-action" style="flex:1;">
+                    <span class="btn-face">1. List Files</span>
+                </button>
+                <button id="scanBtn" class="btn-container lime main-action" style="flex:1;" disabled>
+                    <span class="btn-face">2. Analyze</span>
+                </button>
             </div>
             <div class="control-item-full">
                 <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
@@ -381,7 +386,7 @@ function showDetailsModal(index) {
     let rawDataHtml = '<h3>IP2Location Data</h3><pre>';
     if(item.raw_data && Object.keys(item.raw_data).length > 0) {
         for(const [key, value] of Object.entries(item.raw_data)) { rawDataHtml += `<strong>${key}:</strong> ${JSON.stringify(value)}\n`; }
-    } else { rawDataHtml += 'No detailed IP data available.'; }
+    } else { rawDataHtml += 'No detailed IP data available. Verify IP2LOCATION_API_KEY has credits. '; }
     rawDataHtml += '</pre>';
     elements.modalBody.innerHTML = body + rawDataHtml;
     showModal('detailsModal');
